@@ -1,0 +1,54 @@
+
+For workshop 9, it was quite confused for me, however after I read the note again, I find a way to solve the problem, but it still took time for me.
+The reason that is necessary to use binary files in this workshop is that the binary file is smaller than a text file, so when we are due with the word base file, it will be much more quick to read and write the file. I used the binary file in the backup function and restore function like the code below,
+void SecureData::backup(const char* file) {
+		if (!text)
+			throw std::string("\n***No data stored***\n");
+		else if (!encoded)
+			throw std::string("\n***Data is not encoded***\n");
+		else
+		{
+			ofstream fi(file, ios::binary);
+
+			if (!fi) {
+				throw string("\n***Failed to open file ") + string(file) + string(" ***\n");
+			}
+			else {
+				fi.write(text, nbytes);
+			}
+			fi.close();
+		}
+	}
+
+void SecureData::restore(const char* file, char key) {
+		// TODO: open binary file for reading
+		ifstream fi(file, ios::binary);
+		if (!fi) {
+			throw string("\n***Failed to open file ") + string(file) + string(" ***\n");
+		}
+		else {
+			if (!text) {
+				delete[] text;
+			}
+			fi.seekg(0, ios::beg);
+
+			text = new char[nbytes + 1];
+			fi.read(text, nbytes);
+			text[nbytes] = '\0';
+		}
+		fi.close();
+
+
+		*ofs << "\n" << nbytes << " bytes copied from binary file "
+			<< file << " into memory.\n";
+
+		encoded = true;
+
+		// decode using key
+		code(key);
+
+		*ofs << "Data decrypted in memory\n\n";
+	}
+
+I used bind in the code function to bind the arguments together. I declare a variable auto th, so that every time I call th, it will have the same result when I call converter(text, key, nbytes, Cryptor()), the bind is important in this workshop as we used multi-thread in it, and bind makes the calling easier.
+The advantage of multi-thread is that the same process can share the same memory, this means there will save the memory and spend less time.

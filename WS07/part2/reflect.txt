@@ -1,0 +1,15 @@
+In workshop7, the STL function I use are list below:
+std::for_each;
+I use for_each function to print the content for songs one by one.
+std::sort;
+I use sort function to sort the songs by the required condition.
+std::transform;
+I use transform function to change the string "None" to empty.
+std::any_of
+I use any_of function to find if there is any song that matches the condition.
+std::count_if
+I use count_if to find out how many list containers should I create.
+std::copy_if
+I use copy_if to copy if there is any song that matched the condition and then copies it to the list containers.
+The advantage for STL algorithms is that I don't need to input the loop and iterators by myself and it has some build-in function it is very easy to used STL function.
+In the function that sorts the collection of songs receives as parameter the field name to use, we can use if statement or switch case to check if the string is valid or not if it is invalid, print a message to tell the programmer that the parameter is invalid or throw an error.

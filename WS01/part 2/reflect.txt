@@ -1,0 +1,18 @@
+Name:Yiou(Anna) Wang
+StudentID: 151558194
+Email:ywang811@myseneca.ca
+Date: Jan-21-2020
+
+In the workshop1 I have practiced the concept of linkage, storage duration. The most confusing thing is the extern linkage. When I read the study material and after the lecture, it seems quite easy to understand, however, when it comes to practice, I am confused for a while. At first, I am not sure where should I have the extern linkage, in a head file or an implement file, I read the note and watch the lecture again, try to find the answer from Google, then I decide to put it in the head file. After that, there still have a problem, I got an error when I put the external linkage into the namespace. My code was like below:
+namespace sdds{
+class Event{
+          extern unsigned int g_sysClock;
+       .......
+}
+}
+
+After trying, I finally find a way that put the extern linkage outside the namespace, but I still don't know why. 
+About the storage duration,  I realized that in the instruction it said "COUNTER that holds the number of times that this function has been called (use a local-to-function variable that remains in memory for the lifetime of the program". So I used the static keyword.
+In part2 I wrote the code like below(dynamic memory) to upgrade the string for any length.
+description = new char[strlen(desc) + 1];
+		strcpy(description, desc);

@@ -1,0 +1,21 @@
+In workshop6, I need to deallocate the dynamically allocated memory in my vector as every time I push an element into the vector it will change its' size to store the elements and adjust their size as required.
+The loadData function will call a function called createInstance and received file input as its parameter, in this function, it will check if the first none blank character is c or r or neither. The first character will tell the user if the data is valid or invalid. If the data is invalid, it will throw an error and catch it up in the main function to tell the user that the data is invalid. The other solution I can see is to check the data before I extract it from the file, in other words, write over the file before we read it.
+In the workshop,I had to use std::list<sdds::Vehicle*> and std::vector<sdds::Vehicle*> to store a collection of vehicles as pointers. I don't think that I can change it to std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> instead.
+class Autoshop
+	{
+		std::vector<Vehicle*> m_vehicles;
+	public:
+		Autoshop();
+		Autoshop& operator +=(Vehicle* theVehicle);
+		void display(std::ostream& out)const;
+		~Autoshop();
+
+		template <typename T>
+		void select(T test, std::list<const Vehicle*>& vehicles) {
+			for (auto i = m_vehicles.begin(); i != m_vehicles.end(); i++) {
+				if (test(*i)) {
+					vehicles.push_back(*i);
+				}
+			}
+		}
+As we can see from the above code, we need a container to store the information for vehicles, then select the corresponding vehicles based on the condition (top speed >300 or it is broken). If we change the first container from vector to list it will be hard for the select function as it will check every element in the container (the list has noncontiguous memory). For the second container, I believe that it can be changed to vector as the second one is empty at the first and it only needs to store the selected data.

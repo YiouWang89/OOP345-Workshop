@@ -1,0 +1,47 @@
+Workshop5
+The difference between the functor and lambda expression is that lambda expression do not need an identifier, it is a shorthand for function object. Lambda expression is only used in a local area for an application. Compare with a functor, it can also capture variables by value or reference. A closure for a lambda expression can access directly to non-local variables.Lambda function can be used when you need a function for a short period of time, or when you wanna to pass a function as the argument. When you need a function for the application all the time, and it will be large, it is better to use a functor.
+
+If I need to change the code not include the exception, I may just print a message for the user that there is no file to open. But this method is not efficient, as the rest of the code will still be implemented. But if there is an exception, it will jump out of the block then do the next step.
+
+The logic for Movie and Book are almost the same.
+namespace sdds {
+	class Movie
+	{
+		std::string m_movtitle = "";
+		size_t m_movY = 0u;
+		std::string m_movdes = "";
+	public:
+		Movie();
+		const std::string& title() const;
+		Movie(const std::string& strMovie);
+		template <typename T>
+		void fixSpelling(T& spellChecker) {
+			spellChecker(m_movtitle);
+			spellChecker(m_movdes);
+		}
+		friend std::ostream& operator << (std::ostream&,const Movie&);
+	};
+}
+class Book
+	{
+		std::string m_author = "";
+		std::string m_title = "";
+		std::string m_publicCoun = "";
+		size_t m_publicY = 0u;
+		double m_price = 0;
+		std::string m_des = "";
+	public:
+		Book();
+		const std::string& title() const;
+		const std::string& country() const;
+		const size_t& year() const;
+		double& price();
+		Book(const std::string& strBook);
+		friend std::ostream& operator<<(std::ostream&, const Book&);
+		
+		template <typename T>
+		void fixSpelling(T& spellChecker) {
+			spellChecker(m_des);
+		}
+	};
+The difference between these two this that for movies, we have to spell check both title and the description. The default constructor is to set all the attributes in the class to be the same empty statues, I think I can remove the default constructor, just initialized every attribute in the class to null or zero.

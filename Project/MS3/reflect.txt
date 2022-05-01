@@ -1,0 +1,27 @@
+Project MS3 is the hardest workshop I ever had. I read the instruction many times to make sure that I understand what I have to include in my code. Both Workstation module and LineManager module let me get more familiar with vector and deque container, and also the STL algorithms, I have tried my best to write the STL algorithms, at first, the logic and syntax is a little bit confuse, so I wrote the for loop at the first to make my logic more clear, then try to rewrite them by STL algorithms. Like the code I provide below,
+
+find the first station
+Before,
+for (size_t i = 0u; i < activeLine.size(); i++) {
+			size_t count = 0u;
+			for (size_t j = 0u; j < activeLine.size(); j++) {
+				if ((activeLine[j]->getNextStation() != nullptr) && (activeLine[i]->getItemName() == activeLine[j]->getNextStation()->getItemName())){
+					count++;
+					j = activeLine.size();
+				}	
+			}
+			if (count == 0u) {
+				m_firstStation = activeLine[i];
+				i = activeLine.size();
+			}
+		};
+
+After:
+		vector<Workstation*> activeLine1(activeLine);
+		m_firstStation = *find_if_not(activeLine1.begin(), activeLine1.end(), [activeLine1](const Workstation* ws1)
+			{
+				return any_of(activeLine1.begin(), activeLine1.end(), [ws1](const Workstation* ws2) {
+					return ws1 == ws2->getNextStation(); });
+			});
+
+For all the workshop and the Project, is there any possibility that the professor posts their code to the students so that we can learn how a mature programmer write the code?

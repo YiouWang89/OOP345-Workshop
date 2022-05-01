@@ -1,0 +1,11 @@
+The workshop3 is the most difficult workshop I've ever had. I learn the function template in OOP244, but it is the first time for me to have a class template and specialization template. 
+
+ In this workshop, except the w3_p2.cpp file is an implement file, others are all header files. We didn't split the module into .h and .cpp files is because everything related to the template should all include in the header file as the compiler need to know w to generate the function.
+
+In PairSummable.h file, there is a two arguments constructor PairSummable(const K& key, const V& value = initial), "=initial" means that when a programmer only write one argument for a constructor like PairSummable(m_key), the 2nd argument will be the value of initial by default.
+
+In PairSummable, the reason we specializing the operator += is that due to the different variable types, we have to do different actions. For example, if the variables are int type, then we need to add the value, but if the variables are string, we need to contact them with ", ".
+
+We don't need to specialize the initial value for the summation is because that the static variable has its default value, and the default value is zero.
+
+The reason for defining the class variable outside the class definition is because the variable is static, so we have to define it outside of the class.

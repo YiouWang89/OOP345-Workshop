@@ -1,0 +1,23 @@
+In Workshop8, the advantage of the smart pointer is that I don't need to delete the pointer after I create it, it will destroy by itself. I wrote my  mergeSmart function like below,
+List<Product> mergeSmart(const List<Description>& desc, const List<Price>& price) {
+		List<Product> priceList;
+
+		for (size_t i = 0u; i < desc.size(); i++) {
+			for (size_t j = 0u; j < price.size(); j++) {
+				if (desc[i].code == price[j].code) {
+					shared_ptr<Product> pro(new Product(desc[i].desc, price[j].price));
+					pro->validate();
+					priceList += pro;
+				}
+			}
+		}
+		return priceList;
+	}
+
+void operator+=(std::unique_ptr<T>& src) {
+			list.push_back(*src);
+		}
+
+At first, I used unique_ptr<T> src, pass it by value, but there is an error, after I check the note again I find out in the unique_ptr, the copy construct and copy assign are delete, so I cannot pass it by value, change it pass by reference then I solved this problem.
+
+The difference between a smart pointer and a raw pointer is that for a smart pointer, I don't need to have a delete statement, but if we forget the delete in the raw pointer, it will cause memory leak.
